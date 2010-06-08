@@ -1,0 +1,24 @@
+<h1>Listing ul_files</h1>
+
+<table>
+  <tr>
+    <th>Sender name</th>
+    <th>Recipient email</th>
+    <th>Filename</th>
+  </tr>
+
+<% @ul_files.each do |ul_file| %>
+  <tr>
+    <td><%=h ul_file.sender_name %></td>
+    <td><%=h ul_file.recipient_email %></td>
+    <td><%=h ul_file.filename %></td>
+    <td><%= link_to 'Show', ul_file %></td>
+    <td><%= link_to 'Edit', edit_ul_file_path(ul_file) %></td>
+    <td><%= link_to 'Destroy', ul_file, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New ul_file', new_ul_file_path %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sender_name: MyString
+  recipient_email: MyString
+  filename: MyString
+
+two:
+  sender_name: MyString
+  recipient_email: MyString
+  filename: MyString

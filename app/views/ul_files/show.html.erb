@@ -1,0 +1,20 @@
+<p>
+  <b>Sender name:</b>
+  <%=h @ul_file.sender_name %>
+</p>
+
+<p>
+  <b>Recipient email:</b>
+  <%=h @ul_file.recipient_email %>
+</p>
+
+<p>
+  <b>This is the link that will appear in the email:</b>
+  <%# this seems like a hacky way to do this, but it works for now. %>
+  <% link_path = File.join(url_for(:only_path => false, :escape => false, :action => :new), @ul_file.attachment.url) %>
+  <a href="<%=h link_path %>"><%= link_path %></a>
+</p>
+
+
+<%= link_to 'Edit', edit_ul_file_path(@ul_file) %> |
+<%= link_to 'Back', ul_files_path %>
