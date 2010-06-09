@@ -10,8 +10,7 @@
 
 <p>
   <b>This is the link that will appear in the email:</b>
-  <%# this seems like a hacky way to do this, but it works for now. %>
-  <% link_path = File.join(url_for(:only_path => false, :escape => false, :action => :new), @ul_file.attachment.url) %>
+  <% link_path = File.join("http://", @host_with_port, @ul_file.attachment.url) %>
   <a href="<%=h link_path %>"><%= link_path %></a>
 </p>
 

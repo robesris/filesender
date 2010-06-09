@@ -14,6 +14,7 @@ class UlFilesController < ApplicationController
   # GET /ul_files/1.xml
   def show
     @ul_file = UlFile.find(params[:id])
+    @host_with_port = request.host_with_port
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +26,7 @@ class UlFilesController < ApplicationController
   # GET /ul_files/new.xml
   def new
     @ul_file = UlFile.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @ul_file }
@@ -40,6 +41,7 @@ class UlFilesController < ApplicationController
   # POST /ul_files
   # POST /ul_files.xml
   def create
+    host_with_port = request.host_with_port
     @ul_file = UlFile.new(params[:ul_file])
 
     respond_to do |format|
@@ -47,6 +49,14 @@ class UlFilesController < ApplicationController
         flash[:notice] = 'UlFile was successfully created.'
         format.html { redirect_to(@ul_file) }
         format.xml  { render :xml => @ul_file, :status => :created, :location => @ul_file }
+        FileMailer.deliver_file_notification(
+          :sender     => @ul_file.sender_name,
+          :from       => "FileSender",
+          :recipients => @ul_file.recipient_email,
+          :filename   => @ul_file.attachment_file_name,
+          :url        => @ul_file.attachment.url,
+          :host_with_port => host_with_port
+        )
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @ul_file.errors, :status => :unprocessable_entity }
