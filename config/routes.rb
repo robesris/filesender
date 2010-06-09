@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'ul_files', :action => 'new'
   
-  map.resources :ul_files
+  map.resources :ul_files, :only => [:new, :create, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
 

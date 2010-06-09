@@ -51,7 +51,7 @@ class UlFilesController < ApplicationController
         format.xml  { render :xml => @ul_file, :status => :created, :location => @ul_file }
         FileMailer.deliver_file_notification(
           :sender     => @ul_file.sender_name,
-          :from       => "FileSender",
+          :from       => "FileSender <filesender@notarealdomain.com>",
           :recipients => @ul_file.recipient_email,
           :filename   => @ul_file.attachment_file_name,
           :url        => @ul_file.attachment.url,
